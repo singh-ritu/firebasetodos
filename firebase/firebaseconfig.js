@@ -1,3 +1,5 @@
+"use client";
+
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
@@ -20,19 +22,21 @@ import {
   getDocs,
   serverTimestamp,
 } from "firebase/firestore";
+import { getDatabase, ref, set, onValue } from "firebase/database";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyA_v2MAxekmsOBaloDWShqcyZVuL5OzT0o",
-  authDomain: "todos-13d6e.firebaseapp.com",
-  projectId: "todos-13d6e",
-  storageBucket: "todos-13d6e.firebasestorage.app",
-  messagingSenderId: "1088851123699",
-  appId: "1:1088851123699:web:b6b562a75470c613488686",
-  measurementId: "G-VQ5ZYCCYCD",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
+  databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
 };
 const addUserToFirestore = async (userId, userData) => {
   try {
@@ -48,6 +52,23 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const db = getFirestore(app);
+const database = getDatabase(app);
+const dbRef = ref(database, "isMaintenanceModeOn");
+
+function initialiseFirebaseRealtimeDB(callback) {
+  console.log(dbRef);
+  console.log("init firebase");
+  onValue(dbRef, snapshot => {
+    console.log({ snapshot, dbRef });
+    if (snapshot.exists()) {
+      const isMaintenanceModeOn = snapshot.val();
+      console.log({ isMaintenanceModeOn });
+      callback(isMaintenanceModeOn);
+    } else {
+      callback({ isMaintenanceModeOn: false });
+    }
+  });
+}
 
 export {
   auth,
@@ -67,4 +88,6 @@ export {
   addDoc,
   orderBy,
   getDocs,
+  set,
+  initialiseFirebaseRealtimeDB,
 };
