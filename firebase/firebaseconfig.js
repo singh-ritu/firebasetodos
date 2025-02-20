@@ -49,7 +49,6 @@ const addUserToFirestore = async (userId, userData) => {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const database = getDatabase(app);
@@ -69,13 +68,6 @@ function initialiseFirebaseRealtimeDB(callback) {
     }
   });
 }
-if (typeof window !== "undefined") {
-  isSupported().then(supported => {
-    if (supported) {
-      analytics = getAnalytics(app);
-    }
-  });
-}
 
 export {
   auth,
@@ -83,7 +75,6 @@ export {
   createUserWithEmailAndPassword,
   addUserToFirestore,
   signInWithEmailAndPassword,
-  analytics,
   onAuthStateChanged,
   updateProfile,
   serverTimestamp,
