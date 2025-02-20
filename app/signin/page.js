@@ -9,6 +9,7 @@ import {
   doc,
   getDoc,
 } from "../../firebase/firebaseconfig";
+import Input from "../components/input";
 
 function SignIn() {
   const [email, setEmail] = useState("");
@@ -42,34 +43,41 @@ function SignIn() {
   };
 
   return (
-    <div className="flex items-center justify-center flex-col m-8">
-      <h2 className="font-bold text-2xl mt-4">Welcome Back To Your Todos!</h2>
-      <form
-        className="flex flex-col border hover:border-black px-16 py-8  m-8 rounded-md"
-        onSubmit={handleLogin}>
-        <label htmlFor="email">Email:</label>
-        <input
-          type="text"
-          placeholder="Enter your email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          className="px-8 border border-slate-700 rounded-md mb-4"
-        />
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          placeholder="Enter password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          className="px-8 border border-slate-700 rounded-md mb-4"
-        />
-        {error && <p className="text-red-500">{error}</p>}
-        <button
-          className="border rounded-md bg-slate-500 text-white py-1"
-          type="submit">
-          Log In
-        </button>
-      </form>
+    <div className="flex items-center justify-center flex-col bg-[url('/bg.jpeg')] bg-cover bg-center h-screen">
+      <div className="bg-[#85829e] rounded-lg p-8 text-center">
+        <h2 className="font-bold text-3xl mt-4 text-white">
+          Welcome Back To Your Todos!
+        </h2>
+        <form
+          className="flex flex-col border-[#85829e] bg-white hover:border-black px-16 py-8 m-8 rounded-md"
+          onSubmit={handleLogin}>
+          <label htmlFor="email" className="text-[#85829e] text-left">
+            Email:
+          </label>
+
+          <Input
+            onChange={e => setEmail(e.target.value)}
+            type="text"
+            placeholder="Your Mail"
+            value={email}
+          />
+          <label htmlFor="password" className="text-[#85829e] text-left">
+            Password:
+          </label>
+          <Input
+            onChange={e => setPassword(e.target.value)}
+            type="text"
+            placeholder="Your Password"
+            value={password}
+          />
+          {error && <p className="text-red-500">{error}</p>}
+          <button
+            className="border rounded-md bg-[#85829e] text-white py-1"
+            type="submit">
+            Log In
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

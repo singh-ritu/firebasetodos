@@ -8,10 +8,10 @@ import {
   addUserToFirestore,
 } from "../../firebase/firebaseconfig";
 import { useRouter } from "next/navigation";
+import Input from "../components/input";
 
 function Signup() {
-  const [FirstName, setFirstName] = useState("");
-  const [LastName, setLastName] = useState("");
+  const [Name, setName] = useState("");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,9 +32,9 @@ function Signup() {
       );
       const user = userCredential.user;
 
-      await updateProfile(user, { displayName: name });
+      await updateProfile(user, { displayName: FirstName });
 
-      await addUserToFirestore(user.uid, { name, email });
+      await addUserToFirestore(user.uid, { FirstName, email });
 
       console.log("User signed up:", userCredential.user);
       setSuccess("Signup successful!");
@@ -49,47 +49,48 @@ function Signup() {
   };
 
   return (
-    <div className="flex items-center justify-center flex-col m-8">
-      <h2 className="font-bold text-2xl mt-4">Create your first Todo!</h2>
-      {error && <p className="text-red-500">{error}</p>}
-      {success && <p className="text-green-500">{success}</p>}
-      <form
-        onSubmit={handleSignUp}
-        className="flex flex-col border hover:border-black px-16 py-8  m-8 rounded-md">
-        <label for="name">First Name:</label>
-        <input
-          placeholder="Enter your name"
-          type="text"
-          onChange={e => setName(e.target.value)}
-          className="px-8 border border-slate-700 rounded-md mb-4"
-        />
-        <label for="name">Last Name:</label>
-        <input
-          placeholder="Enter your name"
-          type="text"
-          onChange={e => setName(e.target.value)}
-          className="px-8 border border-slate-700 rounded-md mb-4"
-        />
-        <label for="email">Email:</label>
-        <input
-          placeholder="Enter your mail"
-          type="text"
-          onChange={e => setEmail(e.target.value)}
-          className="px-8 border border-slate-700 rounded-md mb-4"
-        />
-        <label for="password">password:</label>
-        <input
-          placeholder="Enter password"
-          type="password"
-          onChange={e => setPassword(e.target.value)}
-          className="px-8 border border-slate-700 rounded-md mb-4"
-        />
-        <button
-          className="border rounded-md bg-slate-500 text-white py-1"
-          type="submit">
-          Sign Up
-        </button>
-      </form>
+    <div className="flex items-center justify-center flex-col bg-[url('/bg.jpeg')] bg-cover bg-center h-screen">
+      <div className="bg-[#85829e] rounded-lg p-8 text-center">
+        <h2 className="font-bold text-3xl mt-4 text-white">
+          Create your first Todo!
+        </h2>
+        {error && <p className="text-red-500">{error}</p>}
+        {success && <p className="text-green-500">{success}</p>}
+        <form
+          onSubmit={handleSignUp}
+          className="flex flex-col border-[#85829e] bg-white hover:border-black px-16 py-8  m-8 rounded-md">
+          <label for="name" className="text-[#85829e] text-left">
+            Name:
+          </label>
+          <Input
+            onChange={e => setName(e.target.value)}
+            type="text"
+            placeholder="Your Name"
+          />
+
+          <label for="email" className="text-[#85829e] text-left">
+            Email:
+          </label>
+          <Input
+            onChange={e => setEmail(e.target.value)}
+            type="text"
+            placeholder="Your mail"
+          />
+          <label for="password" className="text-[#85829e] text-left">
+            password:
+          </label>
+          <Input
+            onChange={e => setPassword(e.target.value)}
+            type="password"
+            placeholder="create password"
+          />
+          <button
+            className="border rounded-md bg-[#85829e] text-white py-1"
+            type="submit">
+            Sign Up
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
