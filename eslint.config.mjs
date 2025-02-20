@@ -13,12 +13,13 @@ const eslintConfig = [
   ...compat.extends("next/core-web-vitals"),
   {
     languageOptions: {
-      ecmaVersion: "latest", // Ensures compatibility with modern JS features
-      sourceType: "module", // Enables ES Modules support
+      ecmaVersion: "latest",
+      sourceType: "module",
     },
     rules: {
-      "import/no-anonymous-default-export": "off", // Helps prevent function serialization issues
+      "import/no-anonymous-default-export": "off",
     },
   },
 ];
+
 export default eslintConfig;
