@@ -33,7 +33,7 @@ export default function Home() {
         const userTodos = await fetchTodos();
         setTodos(userTodos);
       } else {
-        router.push("/login");
+        router.push("/signin");
       }
     });
 

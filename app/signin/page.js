@@ -17,7 +17,7 @@ function SignIn() {
   const [error, setError] = useState("");
   const router = useRouter();
 
-  const handleLogin = async e => {
+  const handleSignin = async e => {
     e.preventDefault();
     setError(""); // Clear previous error
 
@@ -50,7 +50,7 @@ function SignIn() {
         </h2>
         <form
           className="flex flex-col border-[#85829e] bg-white hover:border-black px-16 py-8 m-8 rounded-md"
-          onSubmit={handleLogin}>
+          onSubmit={handleSignin}>
           <label htmlFor="email" className="text-[#85829e] text-left">
             Email:
           </label>
