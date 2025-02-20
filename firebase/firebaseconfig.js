@@ -69,7 +69,16 @@ function initialiseFirebaseRealtimeDB(callback) {
     }
   });
 }
-
+if (typeof window !== "undefined") {
+  isSupported().then(supported => {
+    if (supported) {
+      analytics = getAnalytics(app);
+      console.log("Analytics initialized");
+    } else {
+      console.log("Firebase Analytics is not supported in this environment");
+    }
+  });
+}
 export {
   auth,
   db,
