@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import {
   auth,
   signInWithEmailAndPassword,
@@ -76,6 +76,11 @@ function SignIn() {
             type="submit">
             Log In
           </button>
+          <span
+            onClick={() => redirect("/signup")}
+            className="cursor-pointer text-blue-400 underline hover:text-blue-600 mt-1 hover:underline-offset-2 transition-all">
+            Already a user
+          </span>
         </form>
       </div>
     </div>

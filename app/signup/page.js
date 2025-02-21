@@ -24,6 +24,9 @@ function Signup() {
     e.preventDefault();
     setError("");
     setSuccess("");
+    setEmail("");
+    setName("");
+    setPassword("");
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
