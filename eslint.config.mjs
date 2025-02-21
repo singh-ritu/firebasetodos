@@ -7,6 +7,7 @@ const eslintConfig = [
   {
     rules: {
       "import/no-anonymous-default-export": "off",
+      "no-undef": "error", // Add this line
     },
   },
 ];

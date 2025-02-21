@@ -35,9 +35,9 @@ function Signup() {
       );
       const user = userCredential.user;
 
-      await updateProfile(user, { displayName: FirstName });
+      await updateProfile(user, { displayName: Name });
 
-      await addUserToFirestore(user.uid, { FirstName, email });
+      await addUserToFirestore(user.uid, { Name, email });
 
       console.log("User signed up:", userCredential.user);
       setSuccess("Signup successful!");

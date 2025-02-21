@@ -66,7 +66,7 @@ function SignIn() {
           </label>
           <Input
             onChange={e => setPassword(e.target.value)}
-            type="text"
+            type="password"
             placeholder="Your Password"
             value={password}
           />
@@ -79,7 +79,7 @@ function SignIn() {
           <span
             onClick={() => redirect("/signup")}
             className="cursor-pointer text-blue-400 underline hover:text-blue-600 mt-1 hover:underline-offset-2 transition-all">
-            Already a user
+            Create a new account
           </span>
         </form>
       </div>
